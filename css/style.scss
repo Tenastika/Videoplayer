@@ -5,20 +5,25 @@
 }
 
 :root {
-  --gold: #ffd700;
+  --gold: #BDAE82;
   --black: #000000;
-  --gark-gold: #ccac00;
-  --light-gold: #ffe140;
+  --silver: #c0c0c0;
+  --bl-trans: #bdae826e;
 }
-
-html, body {
+html {
+  min-height: 100%;
   width: 100%;
+}
+ body {
   height: 100%;
-  background: linear-gradient(135deg, rgb(0, 0, 0) 20%, #ffd700) top left /contain no-repeat;
+
+  background: linear-gradient(rgb(0, 0, 0) 60%, #BDAE82 ) top left /contain no-repeat;
 }
 
 .container {
- max-width: 1280px;
+ max-width: 2100px;
+height: 100%;
+ padding: 5% 10px;
  margin: 0 auto;
  display: flex;
  flex-direction: column;
@@ -30,43 +35,85 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: all 0.4s;
 }
 .title {
   font: 400 120px/130px 'Quintessential';
   color: var(--gold);
-  //text-transform: uppercase;
+  margin-bottom: 50px;
 }
+
+.player-wrapper {
+  width: 100%;
+padding: 10px;
+border: 2px solid var(--gold);
+}
+
 .player {
 position: relative;
+
+overflow: hidden;
   display: flex;
+  flex-direction: column;
  justify-content: center;
  align-items: center;
 width: 100%;
 height: 100%;
+
 		&__video {
       width: 100%;
+      
 		}
+
+    &__setting {
+      font: 400 16px/16px 'Verdana';
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color:var(--gold)
+    }
+
+    .slider-volume {
+      -webkit-appearance: none;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold) 20%, var(--bl-trans) 20%, var(--bl-trans) 100%);
+      border-radius: 10px;
+      height: 7px;
+     width: 40%;
+     border:1px solid var(--gold)
+    }
+
+    .slider-speed {
+      -webkit-appearance: none;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold) 50%, var(--bl-trans) 50%, var(--bl-trans) 100%);
+      border-radius: 10px;
+      height: 7px;
+     width: 30%;
+     border:1px solid var(--gold)
+    }
+
+    .slider-volume::-webkit-slider-thumb,
+    .slider-speed::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 5px;
+      background-color: var(--gold);
+    }
 
 		&__btn-play {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform:  translate(-50%, -50%) scale(1);
       background: url(../assets/svg/play-btn.svg) center center / contain no-repeat;
       width: 100px;
       height: 100px;
-      transition: all 0.5s;
+      
 		}
 
-    &__btn-play._pause {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: url(../assets/svg/pause.svg) center center / contain no-repeat;
-      width: 100px;
-      height: 100px;
-      transition: all 0.5s;
+    &__btn-play._paused {
+      transform:  translate(-50%, -50%) scale(0);
 		}
 
     &__btn-play:hover {
@@ -74,6 +121,95 @@ height: 100%;
       height: 120px;
     }
 
-		&__control {
-		}
+
+    &__control {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.472);
+      width: 100%;
+      
+      bottom: -55px;
+      left: 0;
+      transition: all 0.6s;
+    }
+
+    &__control._open {
+      position: absolute;
+      width: 100%;
+      bottom: 0px;
+      left: 0;
+
+
+      
+  
+        .progress__filled:after {
+          position: absolute;
+          right: -5px;
+          top: -5px;
+          z-index: 5;
+          content: '';
+          background-color: #BDAE82;
+          width: 20px;
+          height: 20px;
+          border-radius: 25%;
+          cursor: ew-resize;
+        }
+    
+    }
+    
+
+    &__button-play {
+     color:var(--gold);
+     font-size: 30px;
+     transform: scale(1);
+     transition: all 0.5s;
+     width: 5%;
+    }
+
+    &__button-play:hover {
+      transform: scale(1.2);
+      
+    }
+
+    &__slider-progress {
+      
+    }
+
+    &__slider {
+      
+    }
+
+    &__button-vol {
+      color:var(--gold);
+     font-size: 30px;
+     width: 5%;
+     text-align: start;
+    }
+
+    &__slider-volume {
+    }
+    .label-speed {
+      width: 10%;
+    }
+
+    &__button-vol._mute {
+      
+    }
+
+    .progress {
+      background-color: var(--bl-trans);
+      width: 100%;
+      
+      &__filled {
+
+        position: relative;
+        background-color: #BDAE82;
+        height: 10px;
+        width: 0%;
+      }
+
+  }
+  
+  
 }
+
+
